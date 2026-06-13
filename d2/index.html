@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DzvLens | Professional Airbnb Photography & AI Enhancement</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Slider mechanics styling adjustments */
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .image-before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        .image-after {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #ffffff;
+            cursor: ew-resize;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            color: #1f2937;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-camera-retro text-amber-500 text-2xl"></i>
+                    <span class="text-2xl font-bold tracking-tight text-gray-900">Dzv<span class="text-amber-500">Lens</span></span>
+                </div>
+                <div class="hidden md:flex items-center gap-8 font-medium text-gray-600">
+                    <a href="#features" class="hover:text-amber-500 transition">Services</a>
+                    <a href="#showcase" class="hover:text-amber-500 transition">Before & After Portfolio</a>
+                    <a href="#pricing" class="hover:text-amber-500 transition">Rates</a>
+                    <a href="#contact" class="bg-gray-950 text-white px-5 py-2.5 rounded-lg hover:bg-amber-500 transition shadow-sm">Book Studio Session</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-gray-950 text-white py-24 lg:py-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <span class="inline-block bg-amber-500/10 text-amber-400 font-semibold px-4 py-1.5 rounded-full text-sm tracking-wide border border-amber-500/20">
+                    Boost Listing Conversion Rates
+                </span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+                    Don't let poor images lower your occupancy rates.
+                </h1>
+                <p class="text-gray-400 text-lg sm:text-xl max-w-xl">
+                    DzvLens transforms your Airbnb properties. Choose between swift cloud-based AI visual enhancements or premium on-site professional interior photography.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="#pricing" class="bg-amber-500 text-gray-950 font-bold px-8 py-4 rounded-xl hover:bg-amber-400 transition transform hover:-translate-y-0.5 shadow-lg shadow-amber-500/20">
+                        Check RM Pricing Plans
+                    </a>
+                    <a href="#showcase" class="bg-gray-900 border border-gray-800 text-white font-medium px-8 py-4 rounded-xl hover:bg-gray-800 transition">
+                        View Transformations
+                    </a>
+                </div>
+            </div>
+            <div class="relative lg:h-[450px] rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
+                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" alt="Beautifully photographed living room" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 bg-black/60 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                    <p class="text-sm font-medium text-amber-400"><i class="fa-solid fa-chart-line mr-2"></i>Avg. 40% growth in booking returns across properties in Malaysia.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services Overview -->
+    <section id="features" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Two strategic ways to enhance listing visuals</h2>
+            <p class="text-gray-600 text-lg">Catering to rapid digital touch-ups or luxury high-end property launches.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- AI Cloud Service -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-wand-magic-sparkles text-purple-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">AI Virtual Enhancement</h3>
+                    <p class="text-gray-600 mb-6">
+                        Upload your smartphone photos. Our AI color engine resolves lens distortion, switches cloudy elements to clear blue skies, balances exposures, and upscales resolution instantly.
+                    </p>
+                    <ul class="space-y-3 text-gray-600 mb-8">
+                        <li><i class="fa-solid fa-circle-check text-purple-600 mr-2"></i> 24-Hour express digital system drop</li>
+                        <li><i class="fa-solid fa-circle-check text-purple-600 mr-2"></i> Sky replacements & perspective adjustments</li>
+                        <li><i class="fa-solid fa-circle-check text-purple-600 mr-2"></i> Cost-efficient option for budget listings</li>
+                    </ul>
+                </div>
+                <a href="#pricing" class="w-full text-center border border-purple-200 text-purple-700 font-medium py-3 rounded-xl hover:bg-purple-50 transition">Explore AI Options</a>
+            </div>
+
+            <!-- Real Professional Service -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-camera text-amber-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">On-Site Real Photography</h3>
+                    <p class="text-gray-600 mb-6">
+                        Our seasoned architectural photographer deploys directly to your site with ultra-wide angle configurations and true HDR tracking arrays to map optimal spacing coordinates.
+                    </p>
+                    <ul class="space-y-3 text-gray-600 mb-8">
+                        <li><i class="fa-solid fa-circle-check text-amber-600 mr-2"></i> Premium composition curation & asset styling</li>
+                        <li><i class="fa-solid fa-circle-check text-amber-600 mr-2"></i> Professional wide-angle tracking lenses</li>
+                        <li><i class="fa-solid fa-circle-check text-amber-600 mr-2"></i> High-resolution twilight & drone options</li>
+                    </ul>
+                </div>
+                <a href="#pricing" class="w-full text-center border border-amber-200 text-amber-700 font-medium py-3 rounded-xl hover:bg-amber-50 transition">Explore Pro Sessions</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expanded Before & After Interactive Showcase Section -->
+    <section id="showcase" class="py-20 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12 space-y-4">
+                <span class="text-amber-400 uppercase font-semibold text-sm tracking-wider block">Interactive Portfolio</span>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Slide to inspect the quality differences</h2>
+                <p class="text-gray-400 text-sm sm:text-base">
+                    Toggle between rooms and drag the comparison element to contrast basic mobile images against DzvLens professional deliveries.
+                </p>
+                
+                <!-- Room Tabs Selection Controls -->
+                <div class="flex justify-center gap-2 pt-4">
+                    <button onclick="switchRoom('living')" id="tab-living" class="px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition bg-amber-500 text-gray-900">
+                        <i class="fa-solid fa-couch mr-2"></i>Living Room
+                    </button>
+                    <button onclick="switchRoom('bedroom')" id="tab-bedroom" class="px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition bg-gray-800 text-gray-400 hover:bg-gray-700">
+                        <i class="fa-solid fa-bed mr-2"></i>Bedroom
+                    </button>
+                    <button onclick="switchRoom('kitchen')" id="tab-kitchen" class="px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition bg-gray-800 text-gray-400 hover:bg-gray-700">
+                        <i class="fa-solid fa-utensils mr-2"></i>Kitchen
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Interactive Canvas Layout Container -->
+            <div class="max-w-4xl mx-auto">
+                <div class="slider-container aspect-[4/3] w-full rounded-2xl shadow-2xl border border-gray-800 select-none" id="beforeAfterSlider">
+                    <!-- AFTER Image Layer Base Viewport -->
+                    <div class="image-after" id="afterImgCanvas" style="background-image: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <!-- BEFORE Image Layer Top Resizable Element -->
+                    <div class="image-before border-r border-white" id="beforeImgCanvas" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80'); width: 50%;"></div>
+                    
+                    <!-- View badges labels -->
+                    <span class="absolute bottom-4 left-4 bg-black/70 text-[10px] sm:text-xs font-bold px-3 py-1 rounded backdrop-blur-sm tracking-wider z-20">PHONE CAMERA</span>
+                    <span class="absolute bottom-4 right-4 bg-amber-500 text-black text-[10px] sm:text-xs font-bold px-3 py-1 rounded tracking-wider z-20">DZVLENS EDIT</span>
+
+                    <!-- Drag Bar Handles Controller -->
+                    <div class="slider-handle" id="sliderHandle">
+                        <div class="slider-button">
+                            <i class="fa-solid fa-arrows-left-right text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Matrix Section (Converted to RM) -->
+    <section id="pricing" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Transparent local pricing models</h2>
+            <p class="text-gray-600 text-lg">No hidden costs. Choose the path suited to your listing tier requirements.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 items-start">
+            <!-- Tier 1: AI Basic -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between h-full">
+                <div>
+                    <div class="text-purple-600 font-bold uppercase text-xs tracking-wider mb-2">Cloud AI Option</div>
+                    <h3 class="text-xl font-bold mb-4">AI Glow Up</h3>
+                    <div class="mb-6">
+                        <span class="text-sm font-bold text-gray-500 valign-middle">RM</span>
+                        <span class="text-4xl font-black tracking-tight">199</span>
+                        <span class="text-gray-500 text-sm"> / listing bundle</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-6">Affordable, quick enhancements for budget-conscious apartments or room listings.</p>
+                    <hr class="border-gray-100 mb-6" />
+                    <ul class="space-y-4 text-sm text-gray-600 mb-8">
+                        <li><i class="fa-solid fa-check text-purple-600 mr-2"></i> Up to 15 user-provided photos</li>
+                        <li><i class="fa-solid fa-check text-purple-600 mr-2"></i> Exposure matching & color balancing</li>
+                        <li><i class="fa-solid fa-check text-purple-600 mr-2"></i> 24-Hour digital delivery delivery link</li>
+                        <li class="text-gray-400 line-through"><i class="fa-solid fa-xmark mr-2"></i> On-site photographer session</li>
+                    </ul>
+                </div>
+                <button class="w-full bg-gray-50 text-gray-900 font-semibold py-3 rounded-xl hover:bg-purple-600 hover:text-white transition">Upload Catalog</button>
+            </div>
+
+            <!-- Tier 2: Real Pro Standard (Recommended) -->
+            <div class="bg-white p-8 rounded-2xl shadow-xl border-2 border-amber-500 flex flex-col justify-between h-full relative">
+                <span class="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-1/2 bg-amber-50 text-amber-800 font-bold text-[10px] uppercase px-4 py-1 rounded-full tracking-wider shadow-sm border border-amber-200">
+                    Most Popular Choice
+                </span>
+                <div>
+                    <div class="text-amber-600 font-bold uppercase text-xs tracking-wider mb-2">On-Site Pro Session</div>
+                    <h3 class="text-xl font-bold mb-4">Pro Classic Shoot</h3>
+                    <div class="mb-6">
+                        <span class="text-sm font-bold text-gray-900">RM</span>
+                        <span class="text-4xl font-black tracking-tight">599</span>
+                        <span class="text-gray-500 text-sm"> / session</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-6">Perfect configuration for standard high-tier condominiums, flats, and modular suburban stays.</p>
+                    <hr class="border-gray-100 mb-6" />
+                    <ul class="space-y-4 text-sm text-gray-600 mb-8">
+                        <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> Full on-site session (1-2 Hours)</li>
+                        <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> 25 High-Res architectural interior shots</li>
+                        <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> Wide-angle styling & framing metrics</li>
+                        <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> 48-Hour delivery delivery turnaround</li>
+                    </ul>
+                </div>
+                <button class="w-full bg-amber-500 text-gray-950 font-bold py-3 rounded-xl hover:bg-amber-400 transition shadow-md shadow-amber-500/10">Book Local Shoot</button>
+            </div>
+
+            <!-- Tier 3: Luxury Combo -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between h-full">
+                <div>
+                    <div class="text-gray-500 font-bold uppercase text-xs tracking-wider mb-2">Elite Portfolio</div>
+                    <h3 class="text-xl font-bold mb-4">Luxury Villa Package</h3>
+                    <div class="mb-6">
+                        <span class="text-sm font-bold text-gray-500">RM</span>
+                        <span class="text-4xl font-black tracking-tight">999</span>
+                        <span class="text-gray-500 text-sm"> / session</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-6">Designed for luxury villas, land estates, and pristine rural setups wanting full media coverage.</p>
+                    <hr class="border-gray-100 mb-6" />
+                    <ul class="space-y-4 text-sm text-gray-600 mb-8">
+                        <li><i class="fa-solid fa-check text-gray-900 mr-2"></i> 40 Premium edited catalog exposures</li>
+                        <li><i class="fa-solid fa-check text-gray-900 mr-2"></i> Drone aerial landscape photography</li>
+                        <li><i class="fa-solid fa-check text-gray-900 mr-2"></i> Twilight/Golden hour landscape capture</li>
+                        <li><i class="fa-solid fa-check text-gray-900 mr-2"></i> 30-Second social promo loop video reel</li>
+                    </ul>
+                </div>
+                <button class="w-full bg-gray-950 text-white font-semibold py-3 rounded-xl hover:bg-gray-800 transition">Request Premium Build</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple Booking / Contact Form -->
+    <section id="contact" class="bg-gray-100 py-20">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 bg-white p-8 sm:p-12 rounded-3xl shadow-sm border border-gray-200/50">
+            <div class="text-center space-y-3 mb-10">
+                <h2 class="text-3xl font-bold tracking-tight">Elevate your listing conversion value</h2>
+                <p class="text-gray-600">Provide details below and our production manager will connect with scheduling logistics quickly.</p>
+            </div>
+            
+            <form class="space-y-6" onsubmit="event.preventDefault(); alert('Inquiry recorded successfully!');">
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-700">Full Name</label>
+                        <input type="text" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-amber-500 transition" placeholder="Your Name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-700">Email Address</label>
+                        <input type="email" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-amber-500 transition" placeholder="name@example.com">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2 text-gray-700">Service Path Package</label>
+                    <select class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-amber-500 transition bg-white">
+                        <option>AI Virtual Enhancement Package (RM 199)</option>
+                        <option selected>Pro Classic On-Site Shoot (RM 599)</option>
+                        <option>Luxury Villa Package (RM 999)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2 text-gray-700">Property Location Details / URL</label>
+                    <textarea rows="3" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-amber-500 transition" placeholder="Insert existing Airbnb address details or physical location structure..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-gray-950 text-white font-bold py-4 rounded-xl hover:bg-amber-500 hover:text-gray-950 transition transform active:scale-[0.99]">
+                    Submit Secure Booking Request
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-gray-500 py-12 border-t border-gray-900 text-center text-sm">
+        <p>&copy; 2026 DzvLens Photography Network. All rights reserved.</p>
+    </footer>
+
+    <!-- Interactive Multimodal Portfolio Manager Scripts -->
+    <script>
+        // Storage matrix holding image asset paths for before-after comparison modes
+        const roomGallery = {
+            living: {
+                before: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80",
+                after: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80"
+            },
+            bedroom: {
+                before: "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=1200&q=80",
+                after: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
+            },
+            kitchen: {
+                before: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80",
+                after: "https://images.unsplash.com/photo-1556911220-bda9f7f7597e?auto=format&fit=crop&w=1200&q=80"
+            }
+        };
+
+        const container = document.getElementById('beforeAfterSlider');
+        const beforeImgCanvas = document.getElementById('beforeImgCanvas');
+        const afterImgCanvas = document.getElementById('afterImgCanvas');
+        const handle = document.getElementById('sliderHandle');
+
+        // Function to transition the slider image assets gracefully based on tab selected
+        function switchRoom(roomKey) {
+            const data = roomGallery[roomKey];
+            if (!data) return;
+
+            // Apply new image target sources
+            beforeImgCanvas.style.backgroundImage = `url('${data.before}')`;
+            afterImgCanvas.style.backgroundImage = `url('${data.after}')`;
+
+            // Reset tab styles dynamically
+            ['living', 'bedroom', 'kitchen'].forEach(key => {
+                const button = document.getElementById(`tab-${key}`);
+                if (key === roomKey) {
+                    button.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition bg-amber-500 text-gray-900";
+                } else {
+                    button.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition bg-gray-800 text-gray-400 hover:bg-gray-700";
+                }
+            });
+
+            // Reset slider split handle alignment back to default central axis 50%
+            beforeImgCanvas.style.width = '50%';
+            handle.style.left = '50%';
+        }
+
+        function moveSlider(clientX) {
+            const rect = container.getBoundingClientRect();
+            const position = clientX - rect.left;
+            let percentage = (position / rect.width) * 100;
+
+            if (percentage < 0) percentage = 0;
+            if (percentage > 100) percentage = 100;
+
+            beforeImgCanvas.style.width = `${percentage}%`;
+            handle.style.left = `${percentage}%`;
+        }
+
+        // Pointer event listener registrations 
+        container.addEventListener('mousemove', (e) => {
+            if (e.buttons === 1) moveSlider(e.clientX);
+        });
+
+        container.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) moveSlider(e.touches[0].clientX);
+        });
+
+        container.addEventListener('click', (e) => {
+            moveSlider(e.clientX);
+        });
+    </script>
+</body>
+</html>
