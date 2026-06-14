@@ -14,6 +14,8 @@
             overflow: hidden;
             cursor: ew-resize;
             touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
         }
         .compare-after,
         .compare-before {
@@ -21,19 +23,20 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            user-select: none;
+            -webkit-user-drag: none;
         }
         .compare-before-wrap {
             position: absolute;
-            inset: 0 auto 0 0;
-            width: 55%;
+            inset: 0;
+            width: 100%;
             overflow: hidden;
-            border-right: 3px solid rgba(255, 255, 255, 0.95);
+            clip-path: inset(0 45% 0 0);
         }
         .compare-before-wrap img {
             width: 100%;
             height: 100%;
-            min-width: 100%;
-            max-width: none;
+            object-fit: cover;
         }
         .compare-handle {
             position: absolute;
@@ -65,6 +68,11 @@
         }
         .compare-frame.is-dragging .compare-handle::after {
             transform: translate(-50%, -50%) scale(0.96);
+        }
+        .compare-frame *,
+        .compare-frame *::before,
+        .compare-frame *::after {
+            user-select: none;
         }
     </style>
 </head>
@@ -411,7 +419,7 @@
             const rawPosition = ((clientX - rect.left) / rect.width) * 100;
             const position = Math.max(0, Math.min(100, rawPosition));
 
-            beforeWrap.style.width = `${position}%`;
+            beforeWrap.style.clipPath = `inset(0 ${100 - position}% 0 0)`;
             handle.style.left = `${position}%`;
         }
 
