@@ -9,51 +9,62 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Slider mechanics styling adjustments */
-        .slider-container {
+        .compare-frame {
             position: relative;
             overflow: hidden;
+            cursor: ew-resize;
+            touch-action: none;
         }
-        .image-before {
+        .compare-after,
+        .compare-before {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .compare-before-wrap {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0 auto 0 0;
+            width: 55%;
+            overflow: hidden;
+            border-right: 3px solid rgba(255, 255, 255, 0.95);
+        }
+        .compare-before-wrap img {
             width: 100%;
             height: 100%;
-            background-size: cover;
-            background-position: center;
+            min-width: 100%;
+            max-width: none;
         }
-        .image-after {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-        }
-        .slider-handle {
+        .compare-handle {
             position: absolute;
             top: 0;
             bottom: 0;
-            width: 4px;
-            background-color: #ffffff;
-            cursor: ew-resize;
-            left: 50%;
+            left: 55%;
+            width: 3px;
             transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.2);
         }
-        .slider-button {
+        .compare-handle::after {
+            content: '\f337';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            background-color: #ffffff;
-            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            border-radius: 9999px;
+            background: #ffffff;
+            color: #111827;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            color: #1f2937;
-            pointer-events: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        .compare-frame.is-dragging .compare-handle::after {
+            transform: translate(-50%, -50%) scale(0.96);
         }
     </style>
 </head>
@@ -162,44 +173,108 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12 space-y-4">
                 <span class="text-amber-400 uppercase font-semibold text-sm tracking-wider block">Interactive Portfolio</span>
-                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Slide to inspect the quality differences</h2>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">See the before and after from recent shoots</h2>
                 <p class="text-gray-400 text-sm sm:text-base">
-                    Toggle between rooms and drag the comparison element to contrast basic mobile images against DzvLens professional deliveries.
+                    Drag each slider to compare the original capture with the polished DzvLens delivery. Six interactive examples are arranged as two cards per row.
                 </p>
-                
-                <!-- Room Tabs Selection Controls -->
-                <div class="flex justify-center gap-2 pt-4">
-                    <button onclick="switchRoom('living')" id="tab-living" class="px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition bg-amber-500 text-gray-900">
-                        <i class="fa-solid fa-couch mr-2"></i>Living Room
-                    </button>
-                    <button onclick="switchRoom('bedroom')" id="tab-bedroom" class="px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition bg-gray-800 text-gray-400 hover:bg-gray-700">
-                        <i class="fa-solid fa-bed mr-2"></i>Bedroom
-                    </button>
-                    <button onclick="switchRoom('kitchen')" id="tab-kitchen" class="px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition bg-gray-800 text-gray-400 hover:bg-gray-700">
-                        <i class="fa-solid fa-utensils mr-2"></i>Kitchen
-                    </button>
-                </div>
             </div>
 
-            <!-- Main Interactive Canvas Layout Container -->
-            <div class="max-w-4xl mx-auto">
-                <div class="slider-container aspect-[4/3] w-full rounded-2xl shadow-2xl border border-gray-800 select-none" id="beforeAfterSlider">
-                    <!-- AFTER Image Layer Base Viewport -->
-                    <div class="image-after" id="afterImgCanvas" style="background-image: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80');"></div>
-                    <!-- BEFORE Image Layer Top Resizable Element -->
-                    <div class="image-before border-r border-white" id="beforeImgCanvas" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80'); width: 50%;"></div>
-                    
-                    <!-- View badges labels -->
-                    <span class="absolute bottom-4 left-4 bg-black/70 text-[10px] sm:text-xs font-bold px-3 py-1 rounded backdrop-blur-sm tracking-wider z-20">PHONE CAMERA</span>
-                    <span class="absolute bottom-4 right-4 bg-amber-500 text-black text-[10px] sm:text-xs font-bold px-3 py-1 rounded tracking-wider z-20">DZVLENS EDIT</span>
-
-                    <!-- Drag Bar Handles Controller -->
-                    <div class="slider-handle" id="sliderHandle">
-                        <div class="slider-button">
-                            <i class="fa-solid fa-arrows-left-right text-sm"></i>
+            <div class="max-w-6xl mx-auto grid gap-6 md:grid-cols-2">
+                <article class="bg-gray-950/60 rounded-2xl overflow-hidden border border-gray-800 shadow-xl">
+                    <div class="compare-frame h-72">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80" alt="Living room after shoot" class="compare-after">
+                        <div class="compare-before-wrap">
+                            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80" alt="Living room before shoot" class="compare-before opacity-90">
                         </div>
+                        <div class="compare-handle"></div>
+                        <span class="absolute top-4 left-4 bg-black/70 text-white text-[11px] font-bold px-3 py-1 rounded-full tracking-wider">BEFORE</span>
+                        <span class="absolute top-4 right-4 bg-amber-500 text-gray-950 text-[11px] font-bold px-3 py-1 rounded-full tracking-wider">AFTER</span>
                     </div>
-                </div>
+                    <div class="p-5">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-amber-400">Living Room Shoot</p>
+                        <p class="mt-2 text-sm text-gray-300">The final frame lifts brightness, composition and spatial clarity without making the room look artificial.</p>
+                    </div>
+                </article>
+
+                <article class="bg-gray-950/60 rounded-2xl overflow-hidden border border-gray-800 shadow-xl">
+                    <div class="compare-frame h-72">
+                        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Bedroom after shoot" class="compare-after">
+                        <div class="compare-before-wrap">
+                            <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=900&q=80" alt="Bedroom before shoot" class="compare-before opacity-90">
+                        </div>
+                        <div class="compare-handle"></div>
+                        <span class="absolute top-4 left-4 bg-black/70 text-white text-[11px] font-bold px-3 py-1 rounded-full tracking-wider">BEFORE</span>
+                        <span class="absolute top-4 right-4 bg-amber-500 text-gray-950 text-[11px] font-bold px-3 py-1 rounded-full tracking-wider">AFTER</span>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-amber-400">Bedroom Shoot</p>
+                        <p class="mt-2 text-sm text-gray-300">The after image feels cleaner and more premium, with tighter framing and a calmer color balance.</p>
+                    </div>
+                </article>
+
+                <article class="bg-gray-950/60 rounded-2xl overflow-hidden border border-gray-800 shadow-xl">
+                    <div class="compare-frame h-72">
+                        <img src="https://images.unsplash.com/photo-1556911220-bda9f7f7597e?auto=format&fit=crop&w=900&q=80" alt="Kitchen after shoot" class="compare-after">
+                        <div class="compare-before-wrap">
+                            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=900&q=80" alt="Kitchen before shoot" class="compare-before opacity-90">
+                        </div>
+                        <div class="compare-handle"></div>
+                        <span class="absolute top-4 left-4 bg-black/70 text-white text-[11px] font-bold px-3 py-1 rounded-full tracking-wider">BEFORE</span>
+                        <span class="absolute top-4 right-4 bg-amber-500 text-gray-950 text-[11px] font-bold px-3 py-1 rounded-full tracking-wider">AFTER</span>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-amber-400">Kitchen Shoot</p>
+                        <p class="mt-2 text-sm text-gray-300">The polished delivery sharpens lines, neutralizes tones and gives surfaces a stronger commercial finish.</p>
+                    </div>
+                </article>
+
+                <article class="bg-gray-950/60 rounded-2xl overflow-hidden border border-gray-800 shadow-xl">
+                    <div class="compare-frame h-72">
+                        <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80" alt="Dining area after shoot" class="compare-after">
+                        <div class="compare-before-wrap">
+                            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Dining area before shoot" class="compare-before opacity-90">
+                        </div>
+                        <div class="compare-handle"></div>
+                        <span class="absolute top-4 left-4 bg-black/70 text-white text-[11px] font-bold px-3 py-1 rounded-full tracking-wider">BEFORE</span>
+                        <span class="absolute top-4 right-4 bg-amber-500 text-gray-950 text-[11px] font-bold px-3 py-1 rounded-full tracking-wider">AFTER</span>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-amber-400">Dining Area Shoot</p>
+                        <p class="mt-2 text-sm text-gray-300">A tighter crop and brighter balance make the communal area feel more welcoming and usable.</p>
+                    </div>
+                </article>
+
+                <article class="bg-gray-950/60 rounded-2xl overflow-hidden border border-gray-800 shadow-xl">
+                    <div class="compare-frame h-72">
+                        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=80" alt="Guest suite after shoot" class="compare-after">
+                        <div class="compare-before-wrap">
+                            <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=900&q=80" alt="Guest suite before shoot" class="compare-before opacity-90">
+                        </div>
+                        <div class="compare-handle"></div>
+                        <span class="absolute top-4 left-4 bg-black/70 text-white text-[11px] font-bold px-3 py-1 rounded-full tracking-wider">BEFORE</span>
+                        <span class="absolute top-4 right-4 bg-amber-500 text-gray-950 text-[11px] font-bold px-3 py-1 rounded-full tracking-wider">AFTER</span>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-amber-400">Guest Suite Shoot</p>
+                        <p class="mt-2 text-sm text-gray-300">The refined delivery gives the room a calmer hotel-style feel with better perceived depth.</p>
+                    </div>
+                </article>
+
+                <article class="bg-gray-950/60 rounded-2xl overflow-hidden border border-gray-800 shadow-xl">
+                    <div class="compare-frame h-72">
+                        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80" alt="Detail corner after shoot" class="compare-after">
+                        <div class="compare-before-wrap">
+                            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=900&q=80" alt="Detail corner before shoot" class="compare-before opacity-90">
+                        </div>
+                        <div class="compare-handle"></div>
+                        <span class="absolute top-4 left-4 bg-black/70 text-white text-[11px] font-bold px-3 py-1 rounded-full tracking-wider">BEFORE</span>
+                        <span class="absolute top-4 right-4 bg-amber-500 text-gray-950 text-[11px] font-bold px-3 py-1 rounded-full tracking-wider">AFTER</span>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-amber-400">Detail Corner Shoot</p>
+                        <p class="mt-2 text-sm text-gray-300">Improved contrast and cleaner lines help styled details read as premium rather than cluttered.</p>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -326,77 +401,52 @@
         <p>&copy; 2026 DzvLens Photography Network. All rights reserved.</p>
     </footer>
 
-    <!-- Interactive Multimodal Portfolio Manager Scripts -->
     <script>
-        // Storage matrix holding image asset paths for before-after comparison modes
-        const roomGallery = {
-            living: {
-                before: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80",
-                after: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80"
-            },
-            bedroom: {
-                before: "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=1200&q=80",
-                after: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
-            },
-            kitchen: {
-                before: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80",
-                after: "https://images.unsplash.com/photo-1556911220-bda9f7f7597e?auto=format&fit=crop&w=1200&q=80"
-            }
-        };
+        const compareFrames = document.querySelectorAll('.compare-frame');
 
-        const container = document.getElementById('beforeAfterSlider');
-        const beforeImgCanvas = document.getElementById('beforeImgCanvas');
-        const afterImgCanvas = document.getElementById('afterImgCanvas');
-        const handle = document.getElementById('sliderHandle');
+        function updateComparePosition(frame, clientX) {
+            const beforeWrap = frame.querySelector('.compare-before-wrap');
+            const handle = frame.querySelector('.compare-handle');
+            const rect = frame.getBoundingClientRect();
+            const rawPosition = ((clientX - rect.left) / rect.width) * 100;
+            const position = Math.max(0, Math.min(100, rawPosition));
 
-        // Function to transition the slider image assets gracefully based on tab selected
-        function switchRoom(roomKey) {
-            const data = roomGallery[roomKey];
-            if (!data) return;
+            beforeWrap.style.width = `${position}%`;
+            handle.style.left = `${position}%`;
+        }
 
-            // Apply new image target sources
-            beforeImgCanvas.style.backgroundImage = `url('${data.before}')`;
-            afterImgCanvas.style.backgroundImage = `url('${data.after}')`;
+        compareFrames.forEach((frame) => {
+            let dragging = false;
 
-            // Reset tab styles dynamically
-            ['living', 'bedroom', 'kitchen'].forEach(key => {
-                const button = document.getElementById(`tab-${key}`);
-                if (key === roomKey) {
-                    button.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition bg-amber-500 text-gray-900";
-                } else {
-                    button.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition bg-gray-800 text-gray-400 hover:bg-gray-700";
+            frame.addEventListener('pointerdown', (event) => {
+                dragging = true;
+                frame.classList.add('is-dragging');
+                frame.setPointerCapture(event.pointerId);
+                updateComparePosition(frame, event.clientX);
+            });
+
+            frame.addEventListener('pointermove', (event) => {
+                if (!dragging) return;
+                updateComparePosition(frame, event.clientX);
+            });
+
+            frame.addEventListener('pointerup', (event) => {
+                dragging = false;
+                frame.classList.remove('is-dragging');
+                frame.releasePointerCapture(event.pointerId);
+            });
+
+            frame.addEventListener('pointerleave', () => {
+                if (!dragging) {
+                    frame.classList.remove('is-dragging');
                 }
             });
 
-            // Reset slider split handle alignment back to default central axis 50%
-            beforeImgCanvas.style.width = '50%';
-            handle.style.left = '50%';
-        }
-
-        function moveSlider(clientX) {
-            const rect = container.getBoundingClientRect();
-            const position = clientX - rect.left;
-            let percentage = (position / rect.width) * 100;
-
-            if (percentage < 0) percentage = 0;
-            if (percentage > 100) percentage = 100;
-
-            beforeImgCanvas.style.width = `${percentage}%`;
-            handle.style.left = `${percentage}%`;
-        }
-
-        // Pointer event listener registrations 
-        container.addEventListener('mousemove', (e) => {
-            if (e.buttons === 1) moveSlider(e.clientX);
-        });
-
-        container.addEventListener('touchmove', (e) => {
-            if (e.touches.length > 0) moveSlider(e.touches[0].clientX);
-        });
-
-        container.addEventListener('click', (e) => {
-            moveSlider(e.clientX);
+            frame.addEventListener('click', (event) => {
+                updateComparePosition(frame, event.clientX);
+            });
         });
     </script>
+
 </body>
 </html>
