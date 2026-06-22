@@ -133,6 +133,134 @@
         .compare-frame *::after {
             user-select: none;
         }
+        .hero-slideshow {
+            position: relative;
+            min-height: 360px;
+            background: #111827;
+        }
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            animation: heroSlide 15s infinite;
+            animation-delay: var(--delay, 0s);
+        }
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .hero-before-wrap {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            overflow: hidden;
+            animation: heroReveal 5s ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+        .hero-wipe {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 100%;
+            width: 3px;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            animation: heroWipe 5s ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+            box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.25);
+        }
+        .hero-wipe::after {
+            content: '\f337';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 38px;
+            height: 38px;
+            border-radius: 9999px;
+            background: #ffffff;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        .hero-badge {
+            position: absolute;
+            top: 1rem;
+            z-index: 2;
+            border-radius: 9999px;
+            background: rgba(17, 24, 39, 0.75);
+            padding: 0.35rem 0.75rem;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+        }
+        .hero-badge.before {
+            left: 1rem;
+        }
+        .hero-badge.after {
+            right: 1rem;
+            background: rgba(245, 158, 11, 0.9);
+            color: #111827;
+        }
+        .hero-dots {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            z-index: 3;
+            display: flex;
+            gap: 0.4rem;
+        }
+        .hero-dots span {
+            width: 0.55rem;
+            height: 0.55rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.45);
+            animation: heroDot 15s infinite;
+            animation-delay: var(--delay, 0s);
+        }
+        @keyframes heroSlide {
+            0%, 30% { opacity: 1; }
+            36%, 94% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes heroReveal {
+            0%, 14% { clip-path: inset(0 0 0 0); }
+            58%, 100% { clip-path: inset(0 100% 0 0); }
+        }
+        @keyframes heroWipe {
+            0%, 14% { left: 100%; }
+            58%, 100% { left: 0%; }
+        }
+        @keyframes heroDot {
+            0%, 30% { background: #f59e0b; transform: scale(1.1); }
+            36%, 100% { background: rgba(255, 255, 255, 0.45); transform: scale(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-slide,
+            .hero-before-wrap,
+            .hero-wipe,
+            .hero-dots span {
+                animation: none;
+            }
+            .hero-slide:first-child {
+                opacity: 1;
+            }
+            .hero-before-wrap {
+                clip-path: inset(0 50% 0 0);
+            }
+            .hero-wipe {
+                left: 50%;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans">
@@ -178,8 +306,39 @@
                     </a>
                 </div>
             </div>
-            <div class="relative lg:h-[450px] rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
-                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" alt="Airbnb living room photographed for a premium Australian short-stay listing" class="w-full h-full object-cover" fetchpriority="high">
+            <div class="hero-slideshow relative h-[360px] lg:h-[450px] rounded-2xl overflow-hidden shadow-2xl border border-gray-800" aria-label="Automatic before and after property photo slideshow">
+                <div class="hero-dots" aria-hidden="true">
+                    <span style="--delay: 0s"></span>
+                    <span style="--delay: 5s"></span>
+                    <span style="--delay: 10s"></span>
+                </div>
+                <div class="hero-slide" style="--delay: 0s">
+                    <img src="../assets/images/portfolio/living-room-au-after.png" alt="Living room after DzvLens photo enhancement" fetchpriority="high">
+                    <div class="hero-before-wrap">
+                        <img src="../assets/images/portfolio/living-room-au-before.png" alt="Living room before DzvLens photo enhancement">
+                    </div>
+                    <span class="hero-badge before">Before</span>
+                    <span class="hero-badge after">After</span>
+                    <div class="hero-wipe" aria-hidden="true"></div>
+                </div>
+                <div class="hero-slide" style="--delay: 5s">
+                    <img src="../assets/images/portfolio/bedroom-au-after.png" alt="Bedroom after DzvLens listing photo enhancement" loading="lazy" decoding="async">
+                    <div class="hero-before-wrap">
+                        <img src="../assets/images/portfolio/bedroom-au-before.png" alt="Bedroom before DzvLens listing photo enhancement" loading="lazy" decoding="async">
+                    </div>
+                    <span class="hero-badge before">Before</span>
+                    <span class="hero-badge after">After</span>
+                    <div class="hero-wipe" aria-hidden="true"></div>
+                </div>
+                <div class="hero-slide" style="--delay: 10s">
+                    <img src="../assets/images/portfolio/kitchen-au-after.png" alt="Kitchen after DzvLens property photo enhancement" loading="lazy" decoding="async">
+                    <div class="hero-before-wrap">
+                        <img src="../assets/images/portfolio/kitchen-au-before.png" alt="Kitchen before DzvLens property photo enhancement" loading="lazy" decoding="async">
+                    </div>
+                    <span class="hero-badge before">Before</span>
+                    <span class="hero-badge after">After</span>
+                    <div class="hero-wipe" aria-hidden="true"></div>
+                </div>
                 <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6 bg-black/60 backdrop-blur-md p-4 rounded-xl border border-white/10">
                     <p class="text-sm font-medium text-amber-400"><i class="fa-solid fa-chart-line mr-2"></i>Built for Airbnb, Stayz and direct-booking properties from city stays to coastal retreats.</p>
